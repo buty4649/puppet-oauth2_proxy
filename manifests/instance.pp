@@ -1,13 +1,10 @@
 # == Define: oauth2_proxy::instance
 #
 define oauth2_proxy::instance(
-  $config,
-  $manage_service = $::oauth2_proxy::params::manage_service,
-  $provider       = $::oauth2_proxy::params::provider,
+  Hash    $config,
+  Boolean $manage_service = $::oauth2_proxy::params::manage_service,
+  String  $provider       = $::oauth2_proxy::params::provider,
 ) {
-  validate_bool($manage_service)
-  validate_hash($config)
-
   file { "/etc/oauth2_proxy/${title}.conf":
     ensure  => file,
     owner   => $::oauth2_proxy::user,

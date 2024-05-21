@@ -1,26 +1,17 @@
 # == Class: oauth2_proxy
 #
 class oauth2_proxy(
-  $user         = $::oauth2_proxy::params::user,
-  $manage_user  = $::oauth2_proxy::params::manage_user,
-  $group        = $::oauth2_proxy::params::group,
-  $manage_group = $::oauth2_proxy::params::manage_group,
-  $install_root = $::oauth2_proxy::params::install_root,
-  $source       = $::oauth2_proxy::params::source,
-  $checksum     = $::oauth2_proxy::params::checksum,
-  $systemd_path = $::oauth2_proxy::params::systemd_path,
-  $shell        = $::oauth2_proxy::params::shell,
-  $provider     = $::oauth2_proxy::params::provider,
+  String $user                       = $::oauth2_proxy::params::user,
+  Boolean $manage_user               = $::oauth2_proxy::params::manage_user,
+  String $group                      = $::oauth2_proxy::params::group,
+  Boolean $manage_group              = $::oauth2_proxy::params::manage_group,
+  Stdlib::Absolutepath $install_root = $::oauth2_proxy::params::install_root,
+  String $source                     = $::oauth2_proxy::params::source,
+  String $checksum                   = $::oauth2_proxy::params::checksum,
+  Stdlib::Absolutepath $systemd_path = $::oauth2_proxy::params::systemd_path,
+  Stdlib::Absolutepath $shell        = $::oauth2_proxy::params::shell,
+  String $provider                   = $::oauth2_proxy::params::provider,
 ) inherits oauth2_proxy::params {
-  validate_string($user)
-  validate_bool($manage_user)
-  validate_string($group)
-  validate_bool($manage_group)
-  validate_absolute_path($install_root)
-  validate_string($source)
-  validate_string($checksum)
-  validate_absolute_path($systemd_path)
-  validate_absolute_path($shell)
 
   if $manage_user {
     user { $user:
